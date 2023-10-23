@@ -1,0 +1,86 @@
+<article>
+
+	{% if home %}
+	
+		<!-- YOU WANT TO SAY HELLO ? -->
+	
+	{% else %}
+
+		{% include 'partials/breadcrumb.twig' %}
+
+	{% endif %}
+
+		<h1>{{ title }}</h1>
+		
+		{{ content }}
+
+</article>
+
+<!-- YOU WANT TO LIST SUB-PAGES ? -->
+
+<section>
+
+	{% if item.contains == 'pages' %}
+
+		<ul>
+			{% for element in item.folderContent %}
+	
+				{% set page = getPageMeta(settings, element) %}
+
+				<li>
+					<a href="{{ element.urlAbs }}">
+						<h2>{{ page.meta.title }}</h2>
+						<p>{{ page.meta.description }}</p>
+					</a>
+				</li>
+
+			{% endfor %}
+
+		</ul>
+
+	{% elseif item.contains == 'posts' %}
+
+		<!-- SET THE DATA FOR PAGINATION -->
+
+		{% set pagesize = 10 %}
+		{% set pages = ( item.folderContent|length / pagesize)|round(0, 'ceil') %}
+		{% set currentpage = currentpage ? currentpage : 1 %}
+		{% set currentposts = (currentpage - 1) * pagesize %} 
+
+		<!-- SHOW LIST ACCORDING TO THE PAGINATION -->
+
+		<ul>
+
+			{% for element in item.folderContent|slice(currentposts, pagesize) %}
+
+				{% set post = getPageMeta(settings, element) %}
+				{% set date = element.order[0:4] ~ '-' ~ element.order[4:2] ~ '-' ~ element.order[6:2] %}
+
+				<li>
+					<a href="{{ element.urlAbs }}"><h2>{{ post.meta.title }}</h2></a>
+					<small><time datetime="{{date}}">{{ date | date("d.m.Y") }}</time> | {{ post.meta.author }}</small>
+					<p>{{ post.meta.description }}</p>
+				</li>
+
+			{% endfor %}
+			
+		</ul>
+
+		<!-- DISPLAY THE PAGINATION -->
+
+		{% if pages > 1 %}
+			<hr class="mv4">
+			<p>Page: 
+				{% for i in 1 .. pages %}
+					{% if i == currentpage %}
+						{{i}}
+					{% else %}
+						<a class="page" href="{{ item.urlAbs }}/p/{{i}}">{{i}}</a>
+					{% endif %}
+				{% endfor %}
+			</p>
+		{% endif %
+
+	{% endif %}	
+
+</section>
