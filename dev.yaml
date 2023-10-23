@@ -1,9 +1,9 @@
-name: Dev Theme
-version: 1.2.0
-description: Dev is a starting point for your own theme with a full html- and twig-skeleton, but without styles. 
-author: Your Name
-homepage: https://yourhomepage
-licence: MIT
+name: Rensner Theme
+version: 1.0
+description: Custom theme built on top of the 'Dev' skeleton theme.
+author: Adrian Schmieg
+homepage: https://example.com
+licence: ''
 
 settings:
   myfield: My Default Value
