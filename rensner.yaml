@@ -2,8 +2,8 @@ name: Rensner Theme
 version: 1.0
 description: Custom theme built on top of the 'Dev' skeleton theme.
 author: Adrian Schmieg
-homepage: https://example.com
-licence: ''
+homepage: https://schmiega.github.io
+licence: 'rights reserved'
 
 settings:
   myfield: My Default Value

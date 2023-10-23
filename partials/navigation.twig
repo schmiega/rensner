@@ -6,29 +6,35 @@
 	
 		{% set depth = element.keyPathArray|length %}
 		
+        {# you can use {{ element.elementType }} to echo "file" / "folder" type #}
         {% if element.activeParent %}
-			<li class="{{ element.elementType }} level-{{ depth }} active parent">
+			<li class="nav-item level-{{ depth }} active parent">
 		{% elseif element.active %}
-			<li class="{{ element.elementType }} level-{{ depth }} active">
+			<li class="nav-item level-{{ depth }} active">
 		{% else %}
-			<li class="{{ element.elementType }} level-{{ depth }}">
+			<li class="nav-item level-{{ depth }}">
 		{% endif %}
-            {% if (element.elementType == 'folder') %}
-				<a href="{{ element.urlAbs }}">{{ element.name }}</a>
-		{% if (element.folderContent|length > 0) %}	
-                <ul>
+        
+        {% if (element.elementType == 'folder') %}
+			<a href="{{ element.urlAbs }}" class="nav-link">
+                <span class="link-text">{{ element.name }}</span>
+            </a>
+            {% if (element.folderContent|length > 0) %}	
+                <ul class="navbar-nav-nav">
                     {{ macros.loop_over(element.folderContent) }}
                 </ul>
-		{% endif %}
-            {% else %}
-				<a href="{{ element.urlAbs }}">{{ element.name }}</a>
             {% endif %}
+        {% else %}
+            <a href="{{ element.urlAbs }}" class="nav-link">
+                <span class="link-text">{{ element.name }}</span>
+            </a>
+        {% endif %}
         </li>
     {% endfor %}
 {% endmacro %}
 
 {% import _self as macros %}
 
-<ul>
+<ul class="navbar-nav">
     {{ macros.loop_over(navigation) }}
 </ul>

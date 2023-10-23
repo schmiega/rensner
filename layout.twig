@@ -43,19 +43,16 @@
 				</defs>
 			</svg>
 		#}
-
-      <nav>
-        <header>
-          <div class="logo">
-            <a href="{{ base_url }}" title="Home">
-              {% if logo %}
-                <img src="{{ logo }}" class="logo-image" />
-              {% else %}
-                {{ settings.title }}
-              {% endif %}
-            </a>
-          </div>
-        </header>
+      <nav class="navbar">
+        <li class="logo">
+          <a href="{{ base_url }}" title="Home" class="nav-link">
+            {% if logo %}
+              <img src="{{ logo }}" class="logo-image" />
+            {% else %}
+              {{ settings.title }}
+            {% endif %}
+          </a>
+        </li>
         {% include 'partials/navigation.twig' %}
       </nav>
 
@@ -70,9 +67,13 @@
         {% endif %}
       </aside>
 
-      {% block content %}
-
-      {% endblock %}
+      <section>
+        {% block content %}
+          {% for c in content %}
+            {{ c }}
+          {% endfor %}
+        {% endblock %}
+      </section>
 
       <footer>
         {% include 'partials/footer.twig' %}
