@@ -1,13 +1,16 @@
-{% set nowYear = "now"|date("Y") %}
+{% set nowYear = 'now'|date('Y') %}
 {% if settings.year is empty or settings.year == nowYear %}
-    {% set copyrightYears = nowYear %}
+  {% set copyrightYears = nowYear %}
 {% else %}
-    {% set copyrightYears = settings.year ~ ' - ' ~ nowYear %}
+  {% set copyrightYears = settings.year ~ ' - ' ~ nowYear %}
 {% endif %}
 
 <div>
-	<p>{{ settings.copyright }} {{ copyrightYears }} {{ settings.author }}. 
-        Built with 
-        <a class="link custom-red hover-dark-gray" href="https://typemill.net">Typemill</a>.
-        </p>
+  <p>
+    {{ settings.copyright }} {{ copyrightYears }} {{ settings.author }}
+    – <a class="link" href="/legal">Impressum.</a>
+  </p>
+  <p>
+    Built with <a class="link" href="https://typemill.net">Typemill</a>.
+  </p>
 </div>
